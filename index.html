@@ -185,6 +185,12 @@ button { font: inherit; color: inherit; }
 .chart-text { font-family: var(--display); font-size: 12px; fill: var(--ink-soft); }
 .chart-grid { stroke: var(--rule); stroke-width: 1; }
 .chart-bar { fill: var(--pen); }
+.pie-slice { stroke: var(--sheet); stroke-width: 2; }
+.pie-text { font-size: 14px; }
+.pie-a { fill: var(--pen); }
+.pie-b { fill: var(--ink-soft); }
+.pie-c { fill: var(--rule); }
+.figure svg.wide { max-width: 420px; }
 .cards { display: flex; flex-wrap: wrap; gap: 12px; }
 .card {
   width: 58px;
@@ -452,6 +458,104 @@ img { max-width: 100%; }
         'Two more folds give about 440,000 km. The Moon is about 384,000 km away.'
       ],
       takeaway: 'Repeated doubling starts slowly and then overtakes anything you can picture.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'The average salary is £62,000. So why does nearly everyone earn £30,000?',
+      question: 'A firm of 10 people says its average salary is £62,000. Nine of the ten earn £30,000 each. How much does the tenth person earn?',
+      options: ['£62,000', '£94,000', '£350,000', '£620,000'],
+      answer: 2,
+      steps: [
+        'An average of £62,000 across 10 people means the firm pays £620,000 in total.',
+        'The nine people on £30,000 account for £270,000 of that.',
+        'The tenth person earns the rest: £620,000 − £270,000 = £350,000.',
+        'Line the ten salaries up in order and the middle one is £30,000. That figure, the median, describes this firm far better than the average does.'
+      ],
+      takeaway: 'One very large value can pull an average a long way from what is typical. Ask for the median as well.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'A million seconds is about 11 days. How long is a billion?',
+      question: 'A million seconds is about eleven and a half days. Roughly how long is a billion seconds?',
+      options: ['About 4 months', 'About 3 years', 'About 32 years', 'About 300 years'],
+      answer: 2,
+      steps: [
+        'A billion is a thousand millions.',
+        'So a billion seconds is about 1,000 × 11.5 days, which is roughly 11,500 days.',
+        'Divide by 365 and you get just under 32 years.'
+      ],
+      takeaway: 'A billion is a thousand times a million. The two words sound much closer together than the numbers are.'
+    },
+    {
+      kind: 'Probability', minutes: 3,
+      tease: 'You can see a red card. What colour is the other side?',
+      question: 'A bag holds three cards. One is red on both sides, one is blue on both sides, and one is red on one side and blue on the other. You pull out a card and lay it down. The face you can see is red. What is the chance the hidden side is also red?',
+      options: ['1 in 3', '1 in 2', '2 in 3', '3 in 4'],
+      answer: 2,
+      steps: [
+        'You saw a red face, so count the red faces you could be looking at. There are three: two on the red-red card and one on the mixed card.',
+        'Each of those three faces is equally likely to be the one on show.',
+        'For two of them the hidden side is red. For one it is blue.',
+        'So the chance is 2 in 3. The tempting answer of 1 in 2 counts cards, when the equally likely things here are faces.'
+      ],
+      takeaway: 'Before working out a chance, be clear about which outcomes are equally likely.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Three boxes, every label wrong, and you may take one fruit. Which box?',
+      question: 'Three boxes are labelled Apples, Oranges and Mixed. One holds only apples, one only oranges and one both, but every label is on the wrong box. You may take one fruit from one box without looking inside. Which box lets you work out all three?',
+      options: ['The box labelled Apples', 'The box labelled Oranges', 'The box labelled Mixed', 'One fruit is never enough'],
+      answer: 2,
+      steps: [
+        'Every label is wrong, so the box labelled Mixed holds only one kind of fruit.',
+        'Take one fruit from it. Suppose it is an apple: that box is the apples.',
+        'The box labelled Oranges cannot hold oranges, and the apples are already found, so it must be the mixed box.',
+        'That leaves the box labelled Apples holding the oranges. If you had drawn an orange, the same reasoning works with the fruits swapped.'
+      ],
+      takeaway: 'Start with the place where a single fact settles the most.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 3,
+      tease: 'Most injured drivers were wearing a seat belt. Does that mean belts do not help?',
+      question: 'A report says 60% of drivers injured in crashes were wearing a seat belt. A commentator concludes that seat belts do not help. Which missing figure would test that conclusion?',
+      options: ['How many crashes happened at night', 'What share of all drivers wear a seat belt', 'How many of the injured were men', 'What colour the cars were'],
+      answer: 1,
+      steps: [
+        'The 60% only means something next to the share of all drivers who wear a belt.',
+        'Suppose, as an example, that 95% of drivers wear one. Then that 95% account for 60% of the injuries.',
+        'The 5% who do not wear one account for the other 40%.',
+        'Per driver, that makes the unbelted about 13 times more likely to be injured.'
+      ],
+      takeaway: 'A share of a group tells you little until you know how large that group is among everyone.'
+    },
+    {
+      kind: 'Logic', minutes: 2,
+      tease: 'Up 50%, then 50% off. Is the price back where it started?',
+      question: 'A shop puts the price of a jacket up by 50%. A month later it takes 50% off the new price in a sale. Compared with the original price, the sale price is:',
+      options: ['Exactly the same', '25% lower', '25% higher', '50% lower'],
+      answer: 1,
+      steps: [
+        'Say the jacket cost £100.',
+        'A 50% rise takes it to £150.',
+        '50% off £150 is £75 off, so the sale price is £75.',
+        '£75 is 25% below the original £100. The rise and the cut are percentages of different amounts.'
+      ],
+      takeaway: 'A percentage is always a percentage of something. Check what that something is.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A pie chart of the apps people use every day. What is wrong with it?',
+      figure: 'pie',
+      question: 'A news site asks 1,000 people which apps they use each day and shows the results as this pie chart. What is wrong with the chart?',
+      options: ['Nothing, the chart is fine', 'The slices add up to 120%, so they are not parts of one whole', '1,000 people is too few to survey', 'The apps should be in alphabetical order'],
+      answer: 1,
+      steps: [
+        'Add the slices: 45 + 40 + 35 = 120.',
+        'A pie chart shows how one whole is divided, so its slices must add up to 100%.',
+        'People could name more than one app, so the three groups overlap.',
+        'A bar chart with one bar per app would show the same results fairly.'
+      ],
+      takeaway: 'Before you read a pie chart, add up the slices.'
     }
   ];
 
@@ -530,6 +634,28 @@ img { max-width: 100%; }
       '<svg viewBox="0 0 320 192" role="img" aria-label="Bar chart with a vertical axis running from 970 to 1,000. The 2025 bar reaches 980 and the 2026 bar reaches 1,000, so the second bar is drawn three times as tall.">' +
       out + '</svg></figure>';
   }
+  function pieFigure() {
+    // Slices are drawn in proportion to their stated values, which is how a chart
+    // like this ends up published even though the values total 120.
+    var parts = [{ name: 'Instagram', v: 45, cls: 'pie-a' }, { name: 'TikTok', v: 40, cls: 'pie-b' }, { name: 'YouTube', v: 35, cls: 'pie-c' }];
+    var total = 0, cx = 200, cy = 108, r = 70, angle = -Math.PI / 2, out = '';
+    parts.forEach(function (p) { total += p.v; });
+    parts.forEach(function (p) {
+      var sweep = p.v / total * 2 * Math.PI, end = angle + sweep, mid = angle + sweep / 2;
+      var x1 = cx + r * Math.cos(angle), y1 = cy + r * Math.sin(angle);
+      var x2 = cx + r * Math.cos(end), y2 = cy + r * Math.sin(end);
+      var lx = cx + (r + 16) * Math.cos(mid), ly = cy + (r + 16) * Math.sin(mid);
+      var anchor = Math.cos(mid) > 0.3 ? 'start' : (Math.cos(mid) < -0.3 ? 'end' : 'middle');
+      if (Math.sin(mid) > 0.3) ly += 10;
+      out += '<path class="pie-slice ' + p.cls + '" d="M' + cx + ' ' + cy + ' L' + x1.toFixed(2) + ' ' + y1.toFixed(2) +
+        ' A' + r + ' ' + r + ' 0 ' + (sweep > Math.PI ? 1 : 0) + ' 1 ' + x2.toFixed(2) + ' ' + y2.toFixed(2) + ' Z"/>' +
+        '<text class="chart-text pie-text" x="' + lx.toFixed(1) + '" y="' + (ly + 4).toFixed(1) + '" text-anchor="' + anchor + '">' + p.name + ' ' + p.v + '%</text>';
+      angle = end;
+    });
+    return '<figure class="figure"><figcaption class="label">Apps people use each day</figcaption>' +
+      '<svg class="wide" viewBox="0 0 400 216" role="img" aria-label="Pie chart with three slices labelled Instagram 45%, TikTok 40% and YouTube 35%.">' +
+      out + '</svg></figure>';
+  }
   function cardsFigure() {
     return '<figure class="figure"><figcaption class="label">The four cards, as they lie on the table</figcaption>' +
       '<div class="cards"><div class="card">E</div><div class="card">K</div><div class="card">4</div><div class="card">7</div></div></figure>';
@@ -601,6 +727,7 @@ img { max-width: 100%; }
       '<h2 class="question">' + q.question + '</h2>';
     if (q.figure === 'chart') html += chartFigure();
     if (q.figure === 'cards') html += cardsFigure();
+    if (q.figure === 'pie') html += pieFigure();
 
     html += '<ol class="options">';
     q.options.forEach(function (text, i) {

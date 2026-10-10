@@ -19,6 +19,7 @@ Add an object to the end of the `QUESTIONS` list:
 ```js
 {
   kind: 'Probability',            // Probability, Estimation, Logic or Spot the flaw
+  figure: 'chart',                // optional: 'chart', 'cards' or 'pie', each drawn by its own function
   minutes: 2,
   tease: 'One line used in the shared result. Never give the answer away.',
   question: 'The question text.',
