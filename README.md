@@ -42,8 +42,15 @@ Edit `LAUNCH` in the script: `{ year: 2026, month: 10, day: 12 }`.
 
 The page runs on any static host. On GitHub Pages: repository Settings, then Pages, then deploy from the `main` branch, root folder.
 
+## Visitor counting and email sign-up
+
+Both are built in and switched off until their settings are filled in, near the top of the script in `index.html`:
+
+- `UMAMI_WEBSITE_ID`: the website ID from Umami. When set, the page loads Umami's script and counts visits plus four events: `first-answer`, `returned` (an answer from someone who has answered on an earlier day), `shared` and `signup`. No cookies are used.
+- `SIGNUP_ACTION`: the address the email form posts to, taken from the email service's form embed code. `SIGNUP_FIELD` is the name of its email field. When set, a sign-up box shows after today's answer and on the opening screen.
+
+The footer text changes with these settings so it always describes what the page really does.
+
 ## Not built yet
 
-- Email reminders
-- Visitor analytics, needed to count returning visitors
 - "How everyone else answered", which needs a database

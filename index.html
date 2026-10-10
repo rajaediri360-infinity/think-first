@@ -368,6 +368,7 @@ button { font: inherit; color: inherit; }
   line-height: 1.5;
 }
 .verdict.right { color: var(--right); }
+.answer-line { font-size: 23px; margin-top: -8px; }
 .verdict.wrong { color: var(--wrong); }
 .working { display: flex; flex-direction: column; gap: 10px; }
 .steps { display: flex; flex-direction: column; gap: 8px; counter-reset: step; }
@@ -453,6 +454,29 @@ button { font: inherit; color: inherit; }
 }
 
 .hold { display: flex; flex-direction: column; gap: 14px; }
+.signup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: var(--paper-white);
+  border: 3px solid var(--wood-dark);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.2);
+}
+.signup-row { display: flex; flex-wrap: wrap; gap: 10px; }
+.signup input {
+  flex: 1 1 180px;
+  min-width: 0;
+  padding: 9px 12px;
+  font-family: var(--hand);
+  font-size: 21px;
+  color: var(--ink);
+  background: var(--parchment);
+  border: 3px solid var(--wood-dark);
+}
+.signup input::placeholder { color: var(--ink-soft); opacity: 0.75; }
+.note.small { font-size: 17px; }
+.signup-done { padding: 10px 14px; background: var(--paper-white); border: 2px dashed var(--wood); }
 .hold .question { text-wrap: balance; }
 
 @media (max-width: 440px) {
@@ -495,10 +519,7 @@ button { font: inherit; color: inherit; }
 
   <main class="sheet" id="sheet"></main>
 
-  <footer class="foot">
-    <p>A new question unlocks at midnight. Miss a day and the streak starts again.</p>
-    <p>Your answers are saved in this browser only.</p>
-  </footer>
+  <footer class="foot" id="foot"></footer>
 </div>
 
 <script>
@@ -507,6 +528,58 @@ button { font: inherit; color: inherit; }
   // Day one of the site. Question 1 shows on this date, question 2 the day after.
   var LAUNCH = { year: 2026, month: 10, day: 12 };
   var KEY = 'thinkfirst.v1';
+
+  // Visitor counting (Umami). Paste the website ID here to switch it on. It counts
+  // visits and answers anonymously and sets no cookies. Leave empty to count nothing.
+  var UMAMI_WEBSITE_ID = '';
+  var UMAMI_SRC = 'https://cloud.umami.is/script.js';
+
+  // Email reminders. Paste the sign-up form's address (its "action" URL) here to show
+  // the sign-up box, and the name of its email field if it is not the usual one.
+  var SIGNUP_ACTION = '';
+  var SIGNUP_FIELD = 'email_address';
+  var SIGNUP_KEY = 'thinkfirst.signup';
+
+  if (UMAMI_WEBSITE_ID) {
+    var counter = document.createElement('script');
+    counter.defer = true;
+    counter.src = UMAMI_SRC;
+    counter.setAttribute('data-website-id', UMAMI_WEBSITE_ID);
+    document.head.appendChild(counter);
+  }
+  function track(name, data) {
+    try { if (UMAMI_WEBSITE_ID && window.umami && window.umami.track) window.umami.track(name, data || {}); } catch (e) { /* counting is optional */ }
+  }
+  function signedUp() {
+    try { return localStorage.getItem(SIGNUP_KEY) === 'yes'; } catch (e) { return false; }
+  }
+  function signupHtml() {
+    if (!SIGNUP_ACTION) return '';
+    if (signedUp()) return '<p class="note signup-done">You are on the list. Check your inbox for a confirmation email.</p>';
+    return '<form class="signup" id="signup" action="' + SIGNUP_ACTION + '" method="post" target="_blank">' +
+      '<label class="label" for="email">Get each day\u2019s question by email</label>' +
+      '<div class="signup-row"><input type="email" id="email" name="' + SIGNUP_FIELD + '" required autocomplete="email" placeholder="you@example.com">' +
+      '<button type="submit" class="btn primary">Remind me</button></div>' +
+      '<p class="note small">One short email a day. Unsubscribe any time.</p></form>';
+  }
+  function wireSignup() {
+    var form = document.getElementById('signup');
+    if (!form) return;
+    form.addEventListener('submit', function () {
+      try { localStorage.setItem(SIGNUP_KEY, 'yes'); } catch (e) { /* storage unavailable */ }
+      track('signup', { day: today });
+      // Let the form post in its new tab first, then swap in the confirmation line.
+      setTimeout(function () { form.outerHTML = signupHtml(); }, 400);
+    });
+  }
+  function renderFoot() {
+    var lines = ['A new question unlocks at midnight. Miss a day and the streak starts again.'];
+    lines.push(UMAMI_WEBSITE_ID
+      ? 'Your streak is saved in this browser. Visits and answers are counted anonymously, with no cookies.'
+      : 'Your answers are saved in this browser only.');
+    if (SIGNUP_ACTION) lines.push('If you sign up for reminders, your email address is used only to send the daily question.');
+    document.getElementById('foot').innerHTML = lines.map(function (t) { return '<p>' + t + '</p>'; }).join('');
+  }
 
   // ---- Questions ------------------------------------------------------------
   // Add new questions to the end of this list. Never reorder or delete one that
@@ -867,7 +940,8 @@ button { font: inherit; color: inherit; }
       '<h2 class="question">' + (before ? 'The first question arrives on ' + when + '.' : 'There is no new question today.') + '</h2>' +
       '<p class="note">' + (before ? 'One reasoning question a day, about five minutes each.' : 'More questions are being written. Your streak and score are safe.') + '</p>' +
       '<div class="countdown"><span class="label">' + (before ? 'Opens in' : 'Check back in') + '</span>' +
-      '<strong id="countdown">' + clock(before ? launchMidnight() : nextMidnight()) + '</strong></div></div>';
+      '<strong id="countdown">' + clock(before ? launchMidnight() : nextMidnight()) + '</strong></div>' + signupHtml() + '</div>';
+    wireSignup();
   }
 
   function renderSheet() {
@@ -900,13 +974,14 @@ button { font: inherit; color: inherit; }
       if (day !== today) after = '<button type="button" class="btn primary" id="backToday">Back to today</button>';
       else after = '<div class="countdown"><span class="label">Next question in</span><strong id="countdown">' + clock(nextMidnight()) + '</strong></div>';
       html += '<section class="result" aria-live="polite">' +
-        '<p class="verdict ' + (right ? 'right' : 'wrong') + '">' +
-        (right ? 'Correct.' : 'Not this time. The answer is ' + letters[q.answer] + ': ' + q.options[q.answer] + '.') + '</p>' +
+        '<p class="verdict ' + (right ? 'right' : 'wrong') + '">' + (right ? 'Correct.' : 'Not this time.') + '</p>' +
+        (right ? '' : '<p class="answer-line">The answer is ' + letters[q.answer] + ': ' + q.options[q.answer] + '.</p>') +
         '<div class="working"><h3 class="label">Working</h3><ol class="steps">' +
         q.steps.map(function (s) { return '<li><span>' + s + '</span></li>'; }).join('') + '</ol></div>' +
         '<p class="takeaway">' + q.takeaway + '</p>' +
         '<div class="actions"><button type="button" class="btn quiet" id="share">Copy my result</button>' + after + '</div>' +
         '<textarea class="share-text" id="shareText" readonly hidden aria-label="Your result, ready to copy"></textarea>' +
+        (day === today ? signupHtml() : '') +
         '</section>';
     }
     sheet.innerHTML = html;
@@ -917,16 +992,21 @@ button { font: inherit; color: inherit; }
           if (day !== today) return;
           answers[day] = Number(b.getAttribute('data-i'));
           save();
+          var played = score().done;
+          track('answered', { day: day, kind: q.kind, correct: isRight(day) ? 'yes' : 'no', streak: streak(), days_played: played });
+          track(played > 1 ? 'returned' : 'first-answer', { day: day });
           render();
         });
       });
       return;
     }
+    wireSignup();
     var back = document.getElementById('backToday');
     if (back) back.addEventListener('click', function () { current = today; render(); window.scrollTo(0, 0); });
     var share = document.getElementById('share');
     share.addEventListener('click', function () {
       var text = shareText(day);
+      track('shared', { day: day });
       function fallback() {
         var box = document.getElementById('shareText');
         box.value = text;
@@ -954,6 +1034,7 @@ button { font: inherit; color: inherit; }
   load();
   today = dayNumber(new Date());
   current = today;
+  renderFoot();
   render();
 })();
 </script>
