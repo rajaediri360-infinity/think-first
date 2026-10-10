@@ -1,0 +1,681 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Think First</title>
+<meta name="description" content="One reasoning question a day, written by a person. Five minutes, then you are done until tomorrow.">
+<meta property="og:title" content="Think First">
+<meta property="og:description" content="One reasoning question a day, written by a person.">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%231D3FBF'/%3E%3Cpath d='M9 16.5l5 5 9-11' fill='none' stroke='%23fff' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap">
+<style>
+/* Layout: one narrow exam-paper column on squared paper. A strip of days sits above the
+   sheet; the working is shown under the answer. Light is ballpoint on squared paper,
+   dark is chalk on a board. */
+:root {
+  --paper: #F3F6FB;
+  --grid: #DFE8F4;
+  --sheet: #FFFFFF;
+  --ink: #14213D;
+  --ink-soft: #4B5A78;
+  --rule: #C7D3E6;
+  --pen: #1D3FBF;
+  --on-pen: #FFFFFF;
+  --pen-wash: #E7EDFC;
+  --right: #1B7443;
+  --right-wash: #E2F3E8;
+  --wrong: #B42B21;
+  --wrong-wash: #FBE8E5;
+  --display: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --text: "STIX Two Text", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141F1C;
+    --grid: #1B2925;
+    --sheet: #1B2925;
+    --ink: #EEF2EC;
+    --ink-soft: #A7B7AE;
+    --rule: #354841;
+    --pen: #F0D46A;
+    --on-pen: #141F1C;
+    --pen-wash: #2F3622;
+    --right: #7FD6A0;
+    --right-wash: #1E3A2B;
+    --wrong: #F29B8E;
+    --wrong-wash: #402522;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #141F1C;
+  --grid: #1B2925;
+  --sheet: #1B2925;
+  --ink: #EEF2EC;
+  --ink-soft: #A7B7AE;
+  --rule: #354841;
+  --pen: #F0D46A;
+  --on-pen: #141F1C;
+  --pen-wash: #2F3622;
+  --right: #7FD6A0;
+  --right-wash: #1E3A2B;
+  --wrong: #F29B8E;
+  --wrong-wash: #402522;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  font-family: var(--text);
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+.page {
+  max-width: 640px;
+  margin-inline: auto;
+  padding-inline: 16px;
+  padding-block: 28px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+h1, h2, h3, p, ol, figure { margin: 0; }
+ol { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--pen); outline-offset: 2px; }
+
+.label {
+  font-family: var(--display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Masthead */
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+.brand { min-width: 0; }
+.wordmark {
+  font-family: var(--display);
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.tagline {
+  margin-top: 6px;
+  font-style: italic;
+  color: var(--ink-soft);
+}
+.tally { display: flex; gap: 22px; }
+.tally div { display: flex; flex-direction: column; gap: 2px; }
+.tally strong {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Day strip */
+.days { display: flex; flex-direction: column; gap: 12px; }
+.day-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.day {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.day:not([disabled]):hover { border-color: var(--pen); }
+.day[disabled] { cursor: default; }
+.day.is-locked { background: none; border-style: dashed; color: var(--ink-soft); }
+.day.was-missed { background: var(--paper); color: var(--ink-soft); text-decoration: line-through; }
+.day.was-right { background: var(--right-wash); border-color: var(--right); color: var(--right); }
+.day.was-wrong { background: var(--wrong-wash); border-color: var(--wrong); color: var(--wrong); }
+.day.is-today { border-color: var(--pen); }
+.day.is-current { box-shadow: 0 0 0 3px var(--pen); border-color: var(--pen); }
+.note { font-size: 15px; color: var(--ink-soft); }
+
+/* The sheet */
+.sheet {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 26px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.meta { display: flex; flex-wrap: wrap; gap: 4px 14px; }
+.meta .kind { color: var(--pen); }
+.question {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.38;
+  text-wrap: pretty;
+}
+.question q { font-style: italic; quotes: "\201C" "\201D"; }
+
+.figure { display: flex; flex-direction: column; gap: 8px; }
+.figure svg { width: 100%; max-width: 360px; height: auto; display: block; }
+.chart-text { font-family: var(--display); font-size: 12px; fill: var(--ink-soft); }
+.chart-grid { stroke: var(--rule); stroke-width: 1; }
+.chart-bar { fill: var(--pen); }
+.cards { display: flex; flex-wrap: wrap; gap: 12px; }
+.card {
+  width: 58px;
+  height: 78px;
+  display: grid;
+  place-items: center;
+  font-size: 34px;
+  font-weight: 600;
+  border: 1.5px solid var(--ink);
+  border-radius: 6px;
+  background: var(--paper);
+}
+
+.options { display: flex; flex-direction: column; gap: 10px; }
+.opt {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 18px;
+  line-height: 1.35;
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.opt .key {
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+.opt .mark { width: 20px; height: 20px; }
+.opt:not([disabled]):hover { border-color: var(--pen); background: var(--pen-wash); }
+.opt[disabled] { cursor: default; }
+.opt.is-dim { color: var(--ink-soft); }
+.opt.is-right { border-color: var(--right); background: var(--right-wash); color: var(--ink); }
+.opt.is-right .mark { color: var(--right); }
+.opt.is-wrong { border-color: var(--wrong); background: var(--wrong-wash); color: var(--ink); }
+.opt.is-wrong .mark { color: var(--wrong); }
+
+.result { display: flex; flex-direction: column; gap: 16px; }
+.verdict {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+}
+.verdict.right { color: var(--right); }
+.verdict.wrong { color: var(--wrong); }
+.working { display: flex; flex-direction: column; gap: 10px; }
+.steps { display: flex; flex-direction: column; gap: 8px; counter-reset: step; }
+.steps li {
+  counter-increment: step;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 8px;
+}
+.steps li::before {
+  content: counter(step) ".";
+  font-family: var(--display);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  padding-top: 3px;
+}
+.takeaway { font-style: italic; }
+
+.actions { display: flex; flex-wrap: wrap; gap: 12px 22px; align-items: center; }
+.countdown { display: flex; flex-direction: column; gap: 2px; }
+.countdown strong {
+  font-family: var(--display);
+  font-size: 18px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+.btn {
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 11px 18px;
+  border-radius: 6px;
+  border: 1px solid var(--pen);
+  cursor: pointer;
+}
+.btn.primary { background: var(--pen); color: var(--on-pen); }
+.btn.quiet { background: var(--sheet); color: var(--pen); }
+.btn.small { padding: 7px 12px; font-size: 14px; }
+.btn[disabled] { border-color: var(--rule); color: var(--ink-soft); cursor: default; }
+.btn.plain {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--pen);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.share-text {
+  width: 100%;
+  min-height: 104px;
+  padding: 10px 12px;
+  font-family: var(--display);
+  font-size: 14px;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.foot { display: flex; flex-direction: column; gap: 8px; font-size: 15px; color: var(--ink-soft); }
+
+@media (max-width: 440px) {
+  .wordmark { font-size: 28px; }
+  .sheet { padding: 20px 16px 18px; }
+  .question { font-size: 20px; }
+  .opt { font-size: 17px; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .opt, .day, .btn { transition: background-color 120ms ease, border-color 120ms ease; }
+}
+
+html { color-scheme: light dark; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+img { max-width: 100%; }
+.hold { display: flex; flex-direction: column; gap: 14px; }
+.hold .question { text-wrap: balance; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header class="masthead">
+    <div class="brand">
+      <h1 class="wordmark">Think First</h1>
+      <p class="tagline">One reasoning question a day, written by a person.</p>
+    </div>
+    <div class="tally" aria-live="polite">
+      <div><span class="label">Streak</span><strong id="streak">0 days</strong></div>
+      <div><span class="label">Score</span><strong id="score">0 of 0</strong></div>
+    </div>
+  </header>
+
+  <nav class="days" aria-label="The last seven days" id="days">
+    <div class="day-row" id="dayRow"></div>
+  </nav>
+
+  <main class="sheet" id="sheet"></main>
+
+  <footer class="foot">
+    <p>A new question unlocks at midnight. Miss a day and the streak starts again.</p>
+    <p>Your answers are saved in this browser only.</p>
+  </footer>
+</div>
+
+<script>
+(function () {
+  // ---- Settings -------------------------------------------------------------
+  // Day one of the site. Question 1 shows on this date, question 2 the day after.
+  var LAUNCH = { year: 2026, month: 10, day: 12 };
+  var KEY = 'thinkfirst.v1';
+
+  // ---- Questions ------------------------------------------------------------
+  // Add new questions to the end of this list. Never reorder or delete one that
+  // has already gone out, because players' saved answers are stored by day number.
+  var QUESTIONS = [
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'You test positive for a rare disease. How worried should you be?',
+      question: 'A disease affects 1 person in 100. The test for it gives the right result 95% of the time, whether or not you have the disease. Your test comes back positive. What is the chance you have the disease?',
+      options: ['95%', 'About 50%', 'About 16%', 'About 1%'],
+      answer: 2,
+      steps: [
+        'Picture 10,000 people taking the test. 100 of them have the disease and 9,900 do not.',
+        'Of the 100 who have it, 95 test positive.',
+        'Of the 9,900 who do not, 5% test positive by mistake. That is 495 people.',
+        'So 590 people test positive and only 95 of them are ill. 95 ÷ 590 is about 16%.'
+      ],
+      takeaway: 'When a condition is rare, most positive results come from the large healthy group.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many times does a heart beat in a lifetime?',
+      question: 'Without looking anything up, roughly how many times does a heart beat in an 80-year life?',
+      options: ['30 million', '300 million', '3 billion', '30 billion'],
+      answer: 2,
+      steps: [
+        'A resting heart beats about 70 times a minute, which is 4,200 times an hour.',
+        'That makes about 100,000 beats a day.',
+        'A year is 365 days, so about 37 million beats a year.',
+        'Over 80 years that comes to about 3 billion.'
+      ],
+      takeaway: 'A number that seems unknowable is often four small multiplications you can do in your head.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A chart says complaints soared. Did they?',
+      figure: 'chart',
+      question: 'A newspaper prints this chart under the headline <q>Complaints soar</q>. By how much did complaints rise from 2025 to 2026?',
+      options: ['About 2%', 'About 20%', 'About 67%', 'About 200%'],
+      answer: 0,
+      steps: [
+        'Read the axis. It starts at 970, where a fair bar chart starts at zero.',
+        'The bars stand for 980 complaints in 2025 and 1,000 in 2026.',
+        'That is 20 more complaints. 20 ÷ 980 is about 2%.',
+        'The right-hand bar looks three times taller because the chart only draws the part above 970: 30 against 10.'
+      ],
+      takeaway: 'Check where the axis starts before you compare the heights of two bars.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Four cards and one rule. Which cards do you turn over?',
+      figure: 'cards',
+      question: 'Each card has a letter on one side and a number on the other. Someone claims: <q>If a card has a vowel on one side, it has an even number on the other.</q> Which cards must you turn over to check the claim?',
+      options: ['E only', 'E and 4', 'E and 7', 'All four cards'],
+      answer: 2,
+      steps: [
+        'Turn E. If the number on the back is odd, the claim is false.',
+        'Turn 7. If the letter on the back is a vowel, the claim is false.',
+        'Leave 4. The claim says nothing about what an even number must have on its back, so no letter there can break it.',
+        'Leave K. The claim says nothing about consonants.'
+      ],
+      takeaway: 'Test a rule by looking for the cases that could break it. Cases that can only agree with it tell you nothing.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'How likely is a shared birthday in a room of 23 people?',
+      question: 'There are 23 people in a room. What is the chance that at least two of them share a birthday?',
+      options: ['About 6%', 'About 23%', 'About 50%', 'About 90%'],
+      answer: 2,
+      steps: [
+        'The question is about any two people, and 23 people make 253 different pairs.',
+        'Work out the chance that nobody matches: 365/365 × 364/365 × 363/365, and so on for all 23 people.',
+        'That product is about 49%.',
+        'So the chance that at least two people match is about 51%. This assumes birthdays are spread evenly and ignores leap years.'
+      ],
+      takeaway: 'The number of pairs grows much faster than the number of people.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A snack "doubles your risk". How many people is that?',
+      question: 'A headline says a popular snack <q>doubles the risk</q> of a rare illness. The study behind it found the risk went from 1 in 10,000 to 2 in 10,000. Out of 10,000 people who eat the snack, how many extra people get the illness?',
+      options: ['1', '100', '5,000', '10,000'],
+      answer: 0,
+      steps: [
+        'Without the snack, 1 person in 10,000 gets the illness.',
+        'With the snack, 2 people in 10,000 get it.',
+        'The difference is 1 extra person in 10,000.',
+        'The headline is true, and so is the sentence "one extra case in ten thousand people". They describe the same finding.'
+      ],
+      takeaway: 'When a risk doubles, ask what it was to begin with.'
+    },
+    {
+      kind: 'Estimation', minutes: 3,
+      tease: 'Fold a sheet of paper 42 times. How thick is it?',
+      question: 'A sheet of paper is 0.1 mm thick. Suppose you could fold it in half 42 times. Roughly how thick would the stack be?',
+      options: ['As tall as a house', 'As tall as Mount Everest', 'As high as the Space Station orbits', 'Further than the Moon'],
+      answer: 3,
+      steps: [
+        'Every fold doubles the thickness, and ten doublings multiply it by about 1,000.',
+        'After 10 folds it is about 10 cm thick. After 20 folds it is about 100 m.',
+        'After 30 folds it is about 100 km, and after 40 folds about 110,000 km.',
+        'Two more folds give about 440,000 km. The Moon is about 384,000 km away.'
+      ],
+      takeaway: 'Repeated doubling starts slowly and then overtakes anything you can picture.'
+    }
+  ];
+
+  var LAST = QUESTIONS.length;
+  var answers = {};
+  var today = 1;      // day number for the current calendar date
+  var current = 1;    // day number being looked at
+
+  // ---- Dates ----------------------------------------------------------------
+  function dayNumber(date) {
+    var then = Date.UTC(LAUNCH.year, LAUNCH.month - 1, LAUNCH.day);
+    var now = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+    return Math.round((now - then) / 86400000) + 1;
+  }
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+  function clock(target) {
+    var s = Math.max(0, Math.floor((target - new Date()) / 1000));
+    var d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600);
+    return (d ? d + 'd ' : '') + h + 'h ' + pad(Math.floor(s % 3600 / 60)) + 'm ' + pad(s % 60) + 's';
+  }
+  function nextMidnight() {
+    var now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+  }
+  function launchMidnight() { return new Date(LAUNCH.year, LAUNCH.month - 1, LAUNCH.day); }
+
+  // ---- Saved answers --------------------------------------------------------
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return;
+      var saved = JSON.parse(raw);
+      if (saved && saved.answers && typeof saved.answers === 'object') answers = saved.answers;
+    } catch (e) { answers = {}; }
+  }
+  function save() {
+    try { localStorage.setItem(KEY, JSON.stringify({ answers: answers })); } catch (e) { /* storage unavailable */ }
+  }
+
+  function hasQuestion(day) { return day >= 1 && day <= LAST; }
+  function answered(day) { return typeof answers[day] === 'number'; }
+  function isRight(day) { return answered(day) && answers[day] === QUESTIONS[day - 1].answer; }
+  // Days answered in a row, ending today, or yesterday if today is still open.
+  function streak() {
+    var n = 0, d = answered(today) ? today : today - 1;
+    while (d > LAST) d--;   // days with no question do not break a streak
+    for (; d >= 1 && answered(d); d--) n++;
+    return n;
+  }
+  function score() {
+    var done = 0, right = 0, d;
+    for (d = 1; d <= LAST; d++) {
+      if (answered(d)) { done++; if (isRight(d)) right++; }
+    }
+    return { done: done, right: right };
+  }
+
+  var TICK = '<svg class="mark" viewBox="0 0 20 20" aria-hidden="true"><path d="M3 10.5 L8 15.5 L17 4.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var CROSS = '<svg class="mark" viewBox="0 0 20 20" aria-hidden="true"><path d="M4.5 4.5 L15.5 15.5 M15.5 4.5 L4.5 15.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>';
+  var BLANK = '<span class="mark"></span>';
+
+  function chartFigure() {
+    // One scale for bars, ticks and labels: value v sits at y = 160 - (v - 970) / 30 * 140.
+    function y(v) { return 160 - (v - 970) / 30 * 140; }
+    var ticks = [970, 980, 990, 1000], out = '';
+    ticks.forEach(function (t) {
+      out += '<line class="chart-grid" x1="52" x2="306" y1="' + y(t) + '" y2="' + y(t) + '"/>' +
+        '<text class="chart-text" x="44" y="' + (y(t) + 4) + '" text-anchor="end">' + (t === 1000 ? '1,000' : t) + '</text>';
+    });
+    var bars = [{ year: '2025', v: 980, x: 96 }, { year: '2026', v: 1000, x: 206 }];
+    bars.forEach(function (b) {
+      out += '<rect class="chart-bar" x="' + b.x + '" y="' + y(b.v) + '" width="64" height="' + (160 - y(b.v)) + '"/>' +
+        '<text class="chart-text" x="' + (b.x + 32) + '" y="180" text-anchor="middle">' + b.year + '</text>';
+    });
+    return '<figure class="figure"><figcaption class="label">Complaints received per year</figcaption>' +
+      '<svg viewBox="0 0 320 192" role="img" aria-label="Bar chart with a vertical axis running from 970 to 1,000. The 2025 bar reaches 980 and the 2026 bar reaches 1,000, so the second bar is drawn three times as tall.">' +
+      out + '</svg></figure>';
+  }
+  function cardsFigure() {
+    return '<figure class="figure"><figcaption class="label">The four cards, as they lie on the table</figcaption>' +
+      '<div class="cards"><div class="card">E</div><div class="card">K</div><div class="card">4</div><div class="card">7</div></div></figure>';
+  }
+
+  // The shared result repeats the hook of the question and never the answer.
+  function shareText(day) {
+    var q = QUESTIONS[day - 1], s = streak();
+    var lines = [
+      'Think First \u00b7 Day ' + day,
+      q.tease,
+      isRight(day) ? '\u2705 I got it. Can you?' : '\u274c It caught me out. Can you get it?'
+    ];
+    if (s >= 2) lines.push('\ud83d\udd25 ' + s + '-day streak');
+    if (location.protocol.indexOf('http') === 0) lines.push(location.origin + location.pathname);
+    return lines.join('\n');
+  }
+
+  function renderTally() {
+    var s = streak(), sc = score();
+    document.getElementById('streak').textContent = s + (s === 1 ? ' day' : ' days');
+    document.getElementById('score').textContent = sc.right + ' of ' + sc.done;
+  }
+
+  function renderDays() {
+    var nav = document.getElementById('days'), row = document.getElementById('dayRow');
+    nav.hidden = today < 1;
+    row.innerHTML = '';
+    if (today < 1) return;
+    var start = Math.max(1, today - 6), day;
+    for (day = start; day < start + 7; day++) (function (day) {
+      var b = document.createElement('button'), cls = 'day', state, open = true;
+      b.type = 'button';
+      b.id = 'day-' + day;
+      if (day > today) { cls += ' is-locked'; state = 'locked'; open = false; }
+      else if (answered(day)) { cls += isRight(day) ? ' was-right' : ' was-wrong'; state = isRight(day) ? 'answered correctly' : 'answered incorrectly'; }
+      else if (!hasQuestion(day)) { state = 'no question'; open = day === today; if (!open) cls += ' is-locked'; }
+      else if (day < today) { cls += ' was-missed'; state = 'missed'; open = false; }
+      else state = 'today, not answered yet';
+      if (day === today) cls += ' is-today';
+      if (day === current) { cls += ' is-current'; b.setAttribute('aria-current', 'true'); }
+      b.className = cls;
+      b.textContent = day;
+      b.setAttribute('aria-label', 'Day ' + day + ', ' + state);
+      if (open) b.addEventListener('click', function () { current = day; render(); });
+      else b.disabled = true;
+      row.appendChild(b);
+    })(day);
+  }
+
+  function renderHold(sheet) {
+    var before = today < 1;
+    var when = launchMidnight().toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' });
+    sheet.innerHTML = '<div class="hold">' +
+      '<div class="meta label"><span>' + (before ? 'Opening soon' : 'Day ' + today + ' \u00b7 today') + '</span></div>' +
+      '<h2 class="question">' + (before ? 'The first question arrives on ' + when + '.' : 'There is no new question today.') + '</h2>' +
+      '<p class="note">' + (before ? 'One reasoning question a day, about five minutes each.' : 'More questions are being written. Your streak and score are safe.') + '</p>' +
+      '<div class="countdown"><span class="label">' + (before ? 'Opens in' : 'Check back in') + '</span>' +
+      '<strong id="countdown">' + clock(before ? launchMidnight() : nextMidnight()) + '</strong></div></div>';
+  }
+
+  function renderSheet() {
+    var sheet = document.getElementById('sheet'), day = current;
+    if (!hasQuestion(day)) { renderHold(sheet); return; }
+    var q = QUESTIONS[day - 1], done = answered(day), chosen = answers[day];
+    var letters = ['A', 'B', 'C', 'D'];
+    var html = '<div class="meta label"><span>Day ' + day + (day === today ? ' \u00b7 today' : '') + '</span>' +
+      '<span class="kind">' + q.kind + '</span><span>About ' + q.minutes + ' minutes</span></div>' +
+      '<h2 class="question">' + q.question + '</h2>';
+    if (q.figure === 'chart') html += chartFigure();
+    if (q.figure === 'cards') html += cardsFigure();
+
+    html += '<ol class="options">';
+    q.options.forEach(function (text, i) {
+      var cls = 'opt', mark = BLANK;
+      if (done) {
+        if (i === q.answer) { cls += ' is-right'; mark = TICK; }
+        else if (i === chosen) { cls += ' is-wrong'; mark = CROSS; }
+        else cls += ' is-dim';
+      }
+      html += '<li><button type="button" class="' + cls + '" id="opt-' + i + '" data-i="' + i + '"' + (done ? ' disabled' : '') + '>' +
+        '<span class="key">' + letters[i] + '</span><span>' + text + '</span>' + mark + '</button></li>';
+    });
+    html += '</ol>';
+
+    if (done) {
+      var right = chosen === q.answer, after;
+      if (day !== today) after = '<button type="button" class="btn primary" id="backToday">Back to today</button>';
+      else after = '<div class="countdown"><span class="label">Next question in</span><strong id="countdown">' + clock(nextMidnight()) + '</strong></div>';
+      html += '<section class="result" aria-live="polite">' +
+        '<p class="verdict ' + (right ? 'right' : 'wrong') + '">' +
+        (right ? 'Correct.' : 'Not this time. The answer is ' + letters[q.answer] + ': ' + q.options[q.answer] + '.') + '</p>' +
+        '<div class="working"><h3 class="label">Working</h3><ol class="steps">' +
+        q.steps.map(function (s) { return '<li><span>' + s + '</span></li>'; }).join('') + '</ol></div>' +
+        '<p class="takeaway">' + q.takeaway + '</p>' +
+        '<div class="actions"><button type="button" class="btn quiet" id="share">Copy my result</button>' + after + '</div>' +
+        '<textarea class="share-text" id="shareText" readonly hidden aria-label="Your result, ready to copy"></textarea>' +
+        '</section>';
+    }
+    sheet.innerHTML = html;
+
+    if (!done) {
+      Array.prototype.forEach.call(sheet.querySelectorAll('.opt'), function (b) {
+        b.addEventListener('click', function () {
+          if (day !== today) return;
+          answers[day] = Number(b.getAttribute('data-i'));
+          save();
+          render();
+        });
+      });
+      return;
+    }
+    var back = document.getElementById('backToday');
+    if (back) back.addEventListener('click', function () { current = today; render(); window.scrollTo(0, 0); });
+    var share = document.getElementById('share');
+    share.addEventListener('click', function () {
+      var text = shareText(day);
+      function fallback() {
+        var box = document.getElementById('shareText');
+        box.value = text;
+        box.hidden = false;
+        box.focus();
+        box.select();
+        share.textContent = 'Select the text below and copy it';
+      }
+      try {
+        navigator.clipboard.writeText(text).then(function () { share.textContent = 'Copied'; }, fallback);
+      } catch (e) { fallback(); }
+    });
+  }
+
+  function render() { renderTally(); renderDays(); renderSheet(); }
+
+  // Tick the countdown, and move to the new question when the date changes.
+  setInterval(function () {
+    var now = dayNumber(new Date());
+    if (now !== today) { today = now; current = now; render(); return; }
+    var el = document.getElementById('countdown');
+    if (el) el.textContent = clock(today < 1 ? launchMidnight() : nextMidnight());
+  }, 1000);
+
+  load();
+  today = dayNumber(new Date());
+  current = today;
+  render();
+})();
+</script>
+</body>
+</html>
