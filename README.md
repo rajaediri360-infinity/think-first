@@ -1,6 +1,8 @@
 # Think First
 
-One reasoning question a day, written by a person. A single static page with no build step and no server.
+One reasoning question a day. A single static page with no build step and no server.
+
+Questions are drafted with AI and checked by the site owner before they go out. The site makes no claim that they are written by a person.
 
 ## How it works
 
