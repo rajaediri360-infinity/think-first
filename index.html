@@ -476,6 +476,7 @@ button { font: inherit; color: inherit; }
 }
 .signup input::placeholder { color: var(--ink-soft); opacity: 0.75; }
 .note.small { font-size: 17px; }
+.note.problem { color: var(--wrong); }
 .signup-done { padding: 10px 14px; background: var(--paper-white); border: 2px dashed var(--wood); }
 .hold .question { text-wrap: balance; }
 
@@ -536,7 +537,7 @@ button { font: inherit; color: inherit; }
 
   // Email reminders. Paste the sign-up form's address (its "action" URL) here to show
   // the sign-up box, and the name of its email field if it is not the usual one.
-  var SIGNUP_ACTION = '';
+  var SIGNUP_ACTION = 'https://app.kit.com/forms/10027407/subscriptions';
   var SIGNUP_FIELD = 'email_address';
   var SIGNUP_KEY = 'thinkfirst.signup';
 
@@ -560,16 +561,39 @@ button { font: inherit; color: inherit; }
       '<label class="label" for="email">Get each day\u2019s question by email</label>' +
       '<div class="signup-row"><input type="email" id="email" name="' + SIGNUP_FIELD + '" required autocomplete="email" placeholder="you@example.com">' +
       '<button type="submit" class="btn primary">Remind me</button></div>' +
+      '<p class="note small problem" id="signupProblem" role="alert" hidden></p>' +
       '<p class="note small">One short email a day. Unsubscribe any time.</p></form>';
   }
   function wireSignup() {
     var form = document.getElementById('signup');
     if (!form) return;
-    form.addEventListener('submit', function () {
-      try { localStorage.setItem(SIGNUP_KEY, 'yes'); } catch (e) { /* storage unavailable */ }
-      track('signup', { day: today });
-      // Let the form post in its new tab first, then swap in the confirmation line.
-      setTimeout(function () { form.outerHTML = signupHtml(); }, 400);
+    form.addEventListener('submit', function (event) {
+      // Send the address in the background so the visitor stays on the page.
+      if (!window.fetch || !window.FormData) return;   // very old browsers: let the form post normally
+      event.preventDefault();
+      var button = form.querySelector('button'), problem = document.getElementById('signupProblem');
+      button.disabled = true;
+      button.textContent = 'Sending';
+      problem.hidden = true;
+      function failed(message) {
+        button.disabled = false;
+        button.textContent = 'Remind me';
+        problem.textContent = message;
+        problem.hidden = false;
+      }
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (response) {
+          return response.json().catch(function () { return {}; }).then(function (body) {
+            if (!response.ok || body.status === 'failed' || body.errors) {
+              failed('That address was not accepted. Check it and try again.');
+              return;
+            }
+            try { localStorage.setItem(SIGNUP_KEY, 'yes'); } catch (e) { /* storage unavailable */ }
+            track('signup', { day: today });
+            form.outerHTML = signupHtml() || '<p class="note signup-done">You are on the list. Check your inbox for a confirmation email.</p>';
+          });
+        })
+        .catch(function () { failed('That did not go through. Check your connection and try again.'); });
     });
   }
   function renderFoot() {
