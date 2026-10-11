@@ -42,6 +42,8 @@ Edit `LAUNCH` in the script: `{ year: 2026, month: 10, day: 12 }`.
 
 The page runs on any static host. On GitHub Pages: repository Settings, then Pages, then deploy from the `main` branch, root folder.
 
+The site's address is `thinkfirstdaily.com`. The domain is registered at Porkbun, and its DNS points at GitHub Pages. The custom domain is set in repository Settings, then Pages, which keeps a `CNAME` file in this repository. Do not delete that file.
+
 ## Visitor counting and email sign-up
 
 Both are built in and switched off until their settings are filled in, near the top of the script in `index.html`:
