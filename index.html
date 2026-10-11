@@ -556,7 +556,7 @@ button { font: inherit; color: inherit; }
   }
   function signupHtml() {
     if (!SIGNUP_ACTION) return '';
-    if (signedUp()) return '<p class="note signup-done">You are on the list. Check your inbox for a confirmation email.</p>';
+    if (signedUp()) return '<p class="note signup-done">You are on the list. Look out for an email from Think First.</p>';
     return '<form class="signup" id="signup" action="' + SIGNUP_ACTION + '" method="post" target="_blank">' +
       '<label class="label" for="email">Get each day\u2019s question by email</label>' +
       '<div class="signup-row"><input type="email" id="email" name="' + SIGNUP_FIELD + '" required autocomplete="email" placeholder="you@example.com">' +
@@ -590,7 +590,7 @@ button { font: inherit; color: inherit; }
             }
             try { localStorage.setItem(SIGNUP_KEY, 'yes'); } catch (e) { /* storage unavailable */ }
             track('signup', { day: today });
-            form.outerHTML = signupHtml() || '<p class="note signup-done">You are on the list. Check your inbox for a confirmation email.</p>';
+            form.outerHTML = signupHtml() || '<p class="note signup-done">You are on the list. Look out for an email from Think First.</p>';
           });
         })
         .catch(function () { failed('That did not go through. Check your connection and try again.'); });
