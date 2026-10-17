@@ -527,7 +527,7 @@ button { font: inherit; color: inherit; }
 (function () {
   // ---- Settings -------------------------------------------------------------
   // Day one of the site. Question 1 shows on this date, question 2 the day after.
-  var LAUNCH = { year: 2026, month: 10, day: 12 };
+  var LAUNCH = { year: 2026, month: 10, day: 19 };
   var KEY = 'thinkfirst.v1';
 
   // Visitor counting (Umami). Paste the website ID here to switch it on. It counts
@@ -558,11 +558,11 @@ button { font: inherit; color: inherit; }
     if (!SIGNUP_ACTION) return '';
     if (signedUp()) return '<p class="note signup-done">You are on the list. Look out for an email from Think First.</p>';
     return '<form class="signup" id="signup" action="' + SIGNUP_ACTION + '" method="post" target="_blank">' +
-      '<label class="label" for="email">Get each day\u2019s question by email</label>' +
+      '<label class="label" for="email">Get the weekly email</label>' +
       '<div class="signup-row"><input type="email" id="email" name="' + SIGNUP_FIELD + '" required autocomplete="email" placeholder="you@example.com">' +
       '<button type="submit" class="btn primary">Remind me</button></div>' +
       '<p class="note small problem" id="signupProblem" role="alert" hidden></p>' +
-      '<p class="note small">One short email a day. Every email has an unsubscribe link.</p></form>';
+      '<p class="note small">One email a week with the answers and what\u2019s coming. Every email has an unsubscribe link.</p></form>';
   }
   function wireSignup() {
     var form = document.getElementById('signup');
@@ -601,7 +601,7 @@ button { font: inherit; color: inherit; }
     lines.push(UMAMI_WEBSITE_ID
       ? 'Your streak is saved in this browser. Visits and answers are counted anonymously, with no cookies.'
       : 'Your answers are saved in this browser only.');
-    if (SIGNUP_ACTION) lines.push('If you sign up for reminders, your email address is used only to send the daily question.');
+    if (SIGNUP_ACTION) lines.push('If you sign up for the weekly email, your address is used only to send it.');
     document.getElementById('foot').innerHTML = lines.map(function (t) { return '<p>' + t + '</p>'; }).join('');
   }
 
