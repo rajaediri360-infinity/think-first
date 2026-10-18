@@ -56,3 +56,7 @@ The footer text changes with these settings so it always describes what the page
 ## Not built yet
 
 - "How everyone else answered", which needs a database
+
+## Copyright
+
+Copyright (c) 2026 Harsh Edirisinghe. All rights reserved. The code, design, questions and text are not licensed for reuse; see `LICENSE`. For permission, email hello@thinkfirstdaily.com.

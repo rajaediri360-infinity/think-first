@@ -1,9 +1,13 @@
 <!doctype html>
+<!-- Think First. Copyright (c) 2026 Harsh Edirisinghe. All rights reserved.
+     The code, design, questions and text of this site may not be copied or reused without permission. -->
 <html lang="en-GB">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Think First</title>
+<meta name="author" content="Harsh Edirisinghe">
+<meta name="copyright" content="&copy; 2026 Harsh Edirisinghe. All rights reserved.">
 <meta name="description" content="One reasoning question a day. Five minutes, then you are done until tomorrow.">
 <meta property="og:title" content="Think First">
 <meta property="og:description" content="One reasoning question a day. Five minutes, then you are done.">
@@ -602,6 +606,7 @@ button { font: inherit; color: inherit; }
       ? 'Your streak is saved in this browser. Visits and answers are counted anonymously, with no cookies.'
       : 'Your answers are saved in this browser only.');
     if (SIGNUP_ACTION) lines.push('If you sign up for the weekly email, your address is used only to send it.');
+    lines.push('&copy; 2026 Harsh Edirisinghe. All rights reserved.');
     document.getElementById('foot').innerHTML = lines.map(function (t) { return '<p>' + t + '</p>'; }).join('');
   }
 
