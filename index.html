@@ -811,6 +811,102 @@ button { font: inherit; color: inherit; }
         'A bar chart with one bar per app would show the same results fairly.'
       ],
       takeaway: 'Before you read a pie chart, add up the slices.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many words are in a 300-page paperback?',
+      question: 'A paperback novel has 300 pages of text. Roughly how many words does it contain?',
+      options: ['9,000', '90,000', '900,000', '9 million'],
+      answer: 1,
+      steps: [
+        'A line of a paperback holds about 10 words.',
+        'A page holds about 30 lines, so about 300 words a page.',
+        '300 pages × 300 words is 90,000 words.'
+      ],
+      takeaway: 'Break a big count into a small unit you can picture, then multiply up.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Roll two dice. How likely is at least one six?',
+      question: 'You roll two ordinary dice. What is the chance that at least one of them shows a six?',
+      options: ['1 in 6', '11 in 36', '12 in 36', '1 in 2'],
+      answer: 1,
+      steps: [
+        'Two dice can land in 6 × 6 = 36 equally likely ways.',
+        'The first die shows a six in 6 of them, and the second die shows a six in 6 of them.',
+        'Adding gives 12, but the double six has been counted twice.',
+        'So 11 of the 36 outcomes have at least one six.'
+      ],
+      takeaway: 'When you add up ways for one thing or another to happen, check for the cases you have counted twice.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A headline says cycling is up 2%. Is it?',
+      question: 'The share of commuters who cycle to work rose from 8% to 10%. A headline reports this as <q>Cycling up 2%</q>. By what percentage did the share of cyclists actually rise?',
+      options: ['2%', '10%', '20%', '25%'],
+      answer: 3,
+      steps: [
+        'The share went from 8% to 10%, a rise of 2 percentage points.',
+        'To find the percentage rise, compare the change with where it started.',
+        '2 ÷ 8 = 0.25, so the share rose by 25%.',
+        'Dividing by the new figure instead gives 20%, which is the wrong starting point.'
+      ],
+      takeaway: 'A change in percentage points and a percentage change are different numbers. Ask which one a headline means.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Five runners and four clues. Who won the race?',
+      question: 'Ana, Ben, Cara, Dev and Eli ran a race with no ties. Eli finished third. Cara finished directly behind Dev. Ana finished ahead of Ben. Ben did not finish last. Who won?',
+      options: ['Ana', 'Ben', 'Dev', 'Eli'],
+      answer: 0,
+      steps: [
+        'Eli is third, so Dev and Cara, who finish one after the other, are either first and second or fourth and fifth.',
+        'If they are first and second, Ana and Ben take fourth and fifth. Ana is ahead of Ben, so Ben would be last, which is not allowed.',
+        'So Dev is fourth and Cara is fifth, leaving first and second for Ana and Ben.',
+        'Ana is ahead of Ben, so Ana won.'
+      ],
+      takeaway: 'Place the fixed facts first, then test each remaining possibility against the rules until only one survives.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 4,
+      tease: 'One hospital has the better survival rate overall. Is it the better hospital?',
+      question: 'Hospital A treated 100 mild cases (99 survived) and 900 severe cases (720 survived). Hospital B treated 900 mild cases (873 survived) and 100 severe cases (70 survived). Overall, 94% of B’s patients survived against 82% of A’s. Which statement is true?',
+      options: ['B did better with both mild and severe cases', 'A did better with both mild and severe cases', 'Each hospital did better with one kind of case', 'The two hospitals cannot be compared at all'],
+      answer: 1,
+      steps: [
+        'Mild cases: A saved 99 of 100, which is 99%. B saved 873 of 900, which is 97%.',
+        'Severe cases: A saved 720 of 900, which is 80%. B saved 70 of 100, which is 70%.',
+        'So A did better with both kinds of patient.',
+        'B looks better overall only because most of its patients were mild cases, who survive more often wherever they go.'
+      ],
+      takeaway: 'When two groups have a different mix of easy and hard cases, compare like with like before comparing the totals.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many grains of rice are in a 1 kg bag?',
+      question: 'A level teaspoon of rice weighs about 5 g and holds about 250 grains. Roughly how many grains are in a 1 kg bag?',
+      options: ['5,000', '50,000', '500,000', '5 million'],
+      answer: 1,
+      steps: [
+        '1 kg is 1,000 g, so the bag holds about 1,000 ÷ 5 = 200 teaspoons.',
+        'Each teaspoon holds about 250 grains.',
+        '200 × 250 = 50,000 grains.'
+      ],
+      takeaway: 'Count a small sample, then scale it up by how many samples fit in the whole.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Draw two balls from a bag of five. How likely are both red?',
+      question: 'A bag holds 3 red balls and 2 blue balls. You take out two balls, one after the other, without putting the first one back. What is the chance that both are red?',
+      options: ['3 in 10', '9 in 25', '1 in 2', '3 in 5'],
+      answer: 0,
+      steps: [
+        'The first ball is red with chance 3 in 5.',
+        'If it was red, the bag now holds 2 red and 2 blue, so the second is red with chance 2 in 4.',
+        '3/5 × 2/4 = 6/20, which is 3 in 10.',
+        'The tempting 9 in 25 is the answer only if you put the first ball back.'
+      ],
+      takeaway: 'When you take something away, the chances for the next draw change with it.'
     }
   ];
 
