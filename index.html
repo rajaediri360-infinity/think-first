@@ -907,6 +907,104 @@ button { font: inherit; color: inherit; }
         'The tempting 9 in 25 is the answer only if you put the first ball back.'
       ],
       takeaway: 'When you take something away, the chances for the next draw change with it.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'A tap drips once a second. How much water is that in a year?',
+      question: 'A leaky tap drips once every second, day and night. It takes about 20 drips to make 1 millilitre. Roughly how much water does the tap waste in a year?',
+      options: ['16 litres', '160 litres', '1,600 litres', '16,000 litres'],
+      answer: 2,
+      steps: [
+        'A day has 86,400 seconds, and a year has about 365 of them, so about 31.5 million seconds.',
+        'That is about 31.5 million drips.',
+        'At 20 drips to the millilitre, that is about 1.6 million millilitres.',
+        'A litre is 1,000 millilitres, so the tap wastes about 1,600 litres.'
+      ],
+      takeaway: 'A tiny amount repeated every second adds up fast, because a year holds about 30 million seconds.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'Town B has four times as many burglaries. Is it less safe?',
+      question: 'Town A has 10,000 residents and had 50 burglaries last year. Town B has 100,000 residents and had 200. A headline says Town B is far less safe because it had four times as many burglaries. Per resident, how does Town A’s burglary rate compare with Town B’s?',
+      options: ['A’s rate is a quarter of B’s', 'The rates are the same', 'A’s rate is 2.5 times B’s', 'A’s rate is 10 times B’s'],
+      answer: 2,
+      steps: [
+        'Town A had 50 burglaries for 10,000 people, which is 5 per 1,000 residents.',
+        'Town B had 200 burglaries for 100,000 people, which is 2 per 1,000 residents.',
+        '5 ÷ 2 = 2.5, so Town A’s rate is 2.5 times Town B’s.',
+        'Town B has more burglaries only because it has ten times as many people.'
+      ],
+      takeaway: 'Before comparing counts between places of different sizes, turn them into rates.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'A £1 game with an £8 prize. Is it worth playing?',
+      question: 'A fairground wheel has 10 equal sections. It costs £1 to spin. If it stops on the one gold section you are paid £8, and otherwise you are paid nothing. Over many spins, what happens to you on average for each spin?',
+      options: ['You win about 20p', 'You break even', 'You lose about 20p', 'You lose about 80p'],
+      answer: 2,
+      steps: [
+        'Picture 10 spins. They cost you £10 in total.',
+        'On average one of the 10 lands on gold and pays £8.',
+        'So you get back £8 for every £10 you pay, a loss of £2.',
+        'Spread over 10 spins, that is a loss of about 20p a spin.'
+      ],
+      takeaway: 'To judge a bet, multiply each prize by its chance and compare the total with what it costs to play.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Two islanders, two statements. Who is telling the truth?',
+      question: 'On an island, knights always tell the truth and knaves always lie. You meet two islanders, Jo and Sam. Jo says: <q>Sam is a knave.</q> Sam says: <q>Jo and I are the same kind.</q> What are they?',
+      options: ['Both are knights', 'Both are knaves', 'Jo is a knight and Sam is a knave', 'Jo is a knave and Sam is a knight'],
+      answer: 2,
+      steps: [
+        'Suppose Jo is a knight. Then Jo tells the truth, so Sam is a knave.',
+        'Sam then lies, so Jo and Sam are of different kinds. A knight and a knave are different, so this fits.',
+        'Now suppose Jo is a knave. Then Jo lies, so Sam is a knight and tells the truth, making Jo a knight too. That contradicts the start.',
+        'Only the first case works: Jo is a knight and Sam is a knave.'
+      ],
+      takeaway: 'When you are stuck, assume one thing, follow it through, and throw out any assumption that contradicts itself.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'The buses come every 10 minutes on average. How long will you wait?',
+      question: 'Buses on a route come in an uneven pattern: a gap of 5 minutes, then a gap of 15 minutes, then 5, then 15, and so on. The average gap is 10 minutes. You turn up at a random moment without checking the times. On average, how long do you wait for a bus?',
+      options: ['5 minutes', '6 minutes 15 seconds', '7 minutes 30 seconds', '10 minutes'],
+      answer: 1,
+      steps: [
+        'The pattern repeats every 20 minutes. 15 of those minutes fall inside a long gap and 5 inside a short one.',
+        'So you land in a long gap 3 times out of 4, and wait on average half of it: 7.5 minutes.',
+        'You land in a short gap 1 time out of 4, and wait on average 2.5 minutes.',
+        '0.75 × 7.5 + 0.25 × 2.5 = 6.25 minutes, which is 6 minutes 15 seconds, longer than half the average gap.'
+      ],
+      takeaway: 'If you arrive at random you are more likely to land in a long gap, so uneven gaps make the average wait longer.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 3,
+      tease: 'Speed cameras went in and crashes fell by 40%. Case closed?',
+      question: 'A council put speed cameras at the 10 junctions that had the most crashes last year. This year, crashes at those 10 junctions fell by 40%. Which is the strongest reason to doubt that the cameras caused the whole fall?',
+      options: ['Cameras take more than a year to start working', 'Junctions picked for an unusually bad year tend to have fewer crashes the next year anyway', 'Ten junctions is too many to study at once', 'A fall of 40% is too large to be real'],
+      answer: 1,
+      steps: [
+        'The number of crashes at a junction goes up and down from year to year partly by chance.',
+        'Picking the 10 worst junctions of one year picks many that had an unluckily bad year.',
+        'Next year their luck is likely to be closer to normal, so their crashes tend to fall even if nothing changes.',
+        'A fair test would compare them with similar junctions that got no cameras, over several years.'
+      ],
+      takeaway: 'When things are chosen because they were extreme, expect them to drift back towards normal on their own.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Three dials, three different digits, adding to 6. How many codes?',
+      question: 'A lock has three dials, each showing a digit from 0 to 9. You remember that the three digits of the code are all different and add up to 6. How many codes fit?',
+      options: ['3', '7', '18', '28'],
+      answer: 2,
+      steps: [
+        'List the groups of three different digits that add to 6: 0, 1, 5 and 0, 2, 4 and 1, 2, 3. There are no others.',
+        'Each group can be set on the dials in 3 × 2 × 1 = 6 different orders.',
+        'So there are 3 × 6 = 18 codes.',
+        'If the digits could repeat, there would be 28, so the word different matters.'
+      ],
+      takeaway: 'Count the groups first, then multiply by the number of ways to arrange each one.'
     }
   ];
 
