@@ -1005,6 +1005,100 @@ button { font: inherit; color: inherit; }
         'If the digits could repeat, there would be 28, so the word different matters.'
       ],
       takeaway: 'Count the groups first, then multiply by the number of ways to arrange each one.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How heavy is the water in a bath?',
+      question: 'A bath is filled to a depth of 20 cm. The water is 1.5 m long and 60 cm wide. Roughly how much does the water weigh?',
+      options: ['18 kg', '180 kg', '1,800 kg', '18 tonnes'],
+      answer: 1,
+      steps: [
+        'Work in metres: 1.5 × 0.6 × 0.2 = 0.18 cubic metres.',
+        'A cubic metre holds 1,000 litres, so the bath holds about 180 litres.',
+        'A litre of water weighs about 1 kg, so the water weighs about 180 kg.'
+      ],
+      takeaway: 'Turn every length into the same unit before you multiply, and the answer usually falls out.'
+    },
+    {
+      kind: 'Logic', minutes: 2,
+      tease: 'A tangle of yesterdays and tomorrows. What day is it?',
+      question: 'Three days after the day before yesterday is a Friday. What day is it today?',
+      options: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      answer: 1,
+      steps: [
+        'The day before yesterday is two days before today.',
+        'Three days after that is one day after today, so tomorrow is Friday.',
+        'That makes today Thursday.'
+      ],
+      takeaway: 'Turn each phrase into a number of days from today, then add them up.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Four coin tosses. How likely is an even split?',
+      question: 'You toss a fair coin four times. What is the chance of getting exactly two heads?',
+      options: ['1 in 4', '3 in 8', '1 in 2', '5 in 8'],
+      answer: 1,
+      steps: [
+        'Four tosses can land in 2 × 2 × 2 × 2 = 16 equally likely ways.',
+        'Exactly two heads happens in 6 of them: HHTT, HTHT, HTTH, THHT, THTH and TTHH.',
+        '6 in 16 is 3 in 8.',
+        'Two heads is the most likely number of heads, yet it still happens less than half the time.'
+      ],
+      takeaway: 'The most likely result can still be less likely than all the other results put together.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 3,
+      tease: 'A gym says its long-term members lost 8 kg. What is it leaving out?',
+      question: 'A gym advert says: <q>Members who have been with us for two years have lost 8 kg on average.</q> What is the biggest problem with using this to judge the gym?',
+      options: ['8 kg is too little to notice', 'It counts only the people who stayed, and those who saw no results may have left', 'Two years is too long to measure anything', 'The advert does not say who owns the gym'],
+      answer: 1,
+      steps: [
+        'The figure only includes people who were still members after two years.',
+        'People who lose weight and enjoy it are more likely to stay. People who see no change are more likely to quit.',
+        'So the stayers can show a large average loss even if the gym makes no difference to a typical person who joins.',
+        'A fair figure would follow everyone who joined two years ago, including those who left.'
+      ],
+      takeaway: 'When a figure only counts the people who stuck with something, ask what happened to the ones who did not.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'Roll a die until you have seen two particular numbers. How long does it take?',
+      question: 'You roll a fair six-sided die again and again until you have seen both a 1 and a 2, in either order. On average, how many rolls does that take?',
+      options: ['6', '7', '9', '12'],
+      answer: 2,
+      steps: [
+        'At first, each roll shows a 1 or a 2 with chance 2 in 6, so on average the first of them takes 6 ÷ 2 = 3 rolls.',
+        'Now you need the other number, which each roll shows with chance 1 in 6. On average that takes 6 more rolls.',
+        '3 + 6 = 9 rolls on average. A computer simulation of 200,000 tries gives the same figure.'
+      ],
+      takeaway: 'Split a long wait into stages, and the average wait is the sum of the average wait for each stage.'
+    },
+    {
+      kind: 'Logic', minutes: 2,
+      tease: 'All strikers are fast, and Priya is fast. So what is Priya?',
+      question: 'Every striker in a football team is fast. Priya, who plays for the team, is fast. What can you conclude?',
+      options: ['Priya is a striker', 'Priya is not a striker', 'Nothing about whether Priya is a striker', 'Every fast player is a striker'],
+      answer: 2,
+      steps: [
+        'The rule says that being a striker means being fast. It does not say that being fast means being a striker.',
+        'Priya could be a fast striker, and that fits the rule.',
+        'Priya could also be a fast defender, and that fits the rule too.',
+        'Both are possible, so you cannot tell which position she plays.'
+      ],
+      takeaway: '<q>All A are B</q> does not mean <q>all B are A</q>. Check which way a rule runs.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many times does a car wheel turn on a long drive?',
+      question: 'A car wheel, tyre included, is about 60 cm across. Roughly how many times does it turn on a 100 km journey?',
+      options: ['5,000', '50,000', '500,000', '5 million'],
+      answer: 1,
+      steps: [
+        'Each turn moves the car forward by the distance around the wheel, about 3 × 60 cm, which is just under 2 m.',
+        '100 km is 100,000 m.',
+        '100,000 ÷ 1.9 is about 53,000 turns.'
+      ],
+      takeaway: 'Find how far one turn takes you, then divide the whole distance by it.'
     }
   ];
 
