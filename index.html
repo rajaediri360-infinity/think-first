@@ -1099,6 +1099,99 @@ button { font: inherit; color: inherit; }
         '100,000 ÷ 1.9 is about 53,000 turns.'
       ],
       takeaway: 'Find how far one turn takes you, then divide the whole distance by it.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How much air do you breathe in a single day?',
+      question: 'Each breath you take at rest is about half a litre of air, and you take about 15 breaths a minute. Roughly how much air do you breathe in a day?',
+      options: ['100 litres', '1,000 litres', '10,000 litres', '100,000 litres'],
+      answer: 2,
+      steps: [
+        'In one minute you breathe about 15 × 0.5 = 7.5 litres.',
+        'A day has 60 × 24 = 1,440 minutes.',
+        '7.5 × 1,440 is about 10,800 litres, so roughly 10,000.'
+      ],
+      takeaway: 'Work out one small unit of time, then scale it up by how many of those units there are.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Pick a number from 1 to 100. How likely is it to have a 7 in it?',
+      question: 'You pick a whole number from 1 to 100 at random, each equally likely. What is the chance that the number contains the digit 7 at least once?',
+      options: ['10 in 100', '18 in 100', '19 in 100', '20 in 100'],
+      answer: 2,
+      steps: [
+        'Ten numbers end in 7: 7, 17, 27 and so on up to 97.',
+        'Ten numbers are in the seventies: 70 to 79.',
+        '77 is in both lists, so it has been counted twice.',
+        'That leaves 10 + 10 − 1 = 19 numbers, so the chance is 19 in 100.'
+      ],
+      takeaway: 'When two lists overlap, add them and then take away what you counted twice.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'Two offices, two scores, one company average. Is it right?',
+      question: 'A company has two offices. The 10 staff in the small office rate their job 9 out of 10 on average. The 90 staff in the large office rate it 5 out of 10 on average. A report adds 9 and 5, halves it, and says the average rating across the company is 7. What is the true average across all 100 staff?',
+      options: ['7', '6', '5.4', '5'],
+      answer: 2,
+      steps: [
+        'The small office gives 10 × 9 = 90 points in total.',
+        'The large office gives 90 × 5 = 450 points.',
+        'Together that is 540 points from 100 people, an average of 5.4.',
+        'The report treated 10 people and 90 people as if they counted equally.'
+      ],
+      takeaway: 'Never average two averages unless the groups are the same size; weight each by how many it covers.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Four lines on a notice, each counting the false ones. Which can be true?',
+      question: 'A notice has four lines. Line 1: <q>Exactly one line on this notice is false.</q> Line 2: <q>Exactly two lines are false.</q> Line 3: <q>Exactly three lines are false.</q> Line 4: <q>All four lines are false.</q> Each line is either true or false. Which lines are true?',
+      options: ['Only line 1', 'Only line 3', 'Lines 1 and 3', 'None of them'],
+      answer: 1,
+      steps: [
+        'The lines contradict each other, so at most one of them can be true.',
+        'If none were true, all four would be false, which would make line 4 true. So exactly one is true.',
+        'With one true line, three lines are false, and that is exactly what line 3 says.'
+      ],
+      takeaway: 'With statements that talk about themselves, test each possible count and keep the one that agrees with itself.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'Roll two dice and keep the higher one. What do you get on average?',
+      question: 'You roll two fair six-sided dice and keep whichever number is higher (if they match, you keep that number). On average, what number do you keep?',
+      options: ['3.5', 'About 4', 'About 4.5', 'About 5'],
+      answer: 2,
+      steps: [
+        'Of the 36 equally likely rolls, the higher number is 1 in 1 roll, 2 in 3 rolls, 3 in 5, 4 in 7, 5 in 9 and 6 in 11.',
+        'Add up the kept numbers: 1×1 + 2×3 + 3×5 + 4×7 + 5×9 + 6×11 = 161.',
+        '161 ÷ 36 is about 4.47, so about 4.5.'
+      ],
+      takeaway: 'Keeping the best of two tries pulls the average up, but by less than you might guess.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many sheets of paper would cover a football pitch?',
+      question: 'A football pitch is about 100 m long and 70 m wide. A sheet of A4 paper is about 21 cm by 30 cm. Roughly how many sheets, laid flat without overlapping, would cover the pitch?',
+      options: ['1,000', '10,000', '100,000', '1 million'],
+      answer: 2,
+      steps: [
+        'The pitch is 100 × 70 = 7,000 square metres.',
+        'A sheet is 0.21 × 0.3, about 0.063 square metres, so about 16 sheets cover one square metre.',
+        '7,000 × 16 is about 112,000 sheets, so roughly 100,000.'
+      ],
+      takeaway: 'For areas, put both things in the same units, then divide the big area by the small one.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A big online poll says most people prefer shopping online. Should you believe it?',
+      question: 'A shopping website puts a poll on its home page: <q>Do you prefer shopping online or in shops?</q> Of 20,000 replies, 85% say online. A headline says most people prefer shopping online. What is the biggest problem?',
+      options: ['20,000 replies is too few to mean anything', 'Only people already visiting a shopping website could answer', 'The poll should have offered more than two choices', 'Nothing, 85% is a clear majority'],
+      answer: 1,
+      steps: [
+        'Everyone who answered was already on a shopping website, so they were likely to shop online.',
+        'People who prefer shops were far less likely to see the poll at all.',
+        'A large sample does not fix this: 20,000 people chosen in a biased way still give a biased answer.'
+      ],
+      takeaway: 'Ask who could answer a poll before trusting what it says about everyone.'
     }
   ];
 
