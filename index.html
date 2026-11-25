@@ -1005,6 +1005,290 @@ button { font: inherit; color: inherit; }
         'If the digits could repeat, there would be 28, so the word different matters.'
       ],
       takeaway: 'Count the groups first, then multiply by the number of ways to arrange each one.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How heavy is the water in a bath?',
+      question: 'A bath is filled to a depth of 20 cm. The water is 1.5 m long and 60 cm wide. Roughly how much does the water weigh?',
+      options: ['18 kg', '180 kg', '1,800 kg', '18 tonnes'],
+      answer: 1,
+      steps: [
+        'Work in metres: 1.5 × 0.6 × 0.2 = 0.18 cubic metres.',
+        'A cubic metre holds 1,000 litres, so the bath holds about 180 litres.',
+        'A litre of water weighs about 1 kg, so the water weighs about 180 kg.'
+      ],
+      takeaway: 'Turn every length into the same unit before you multiply, and the answer usually falls out.'
+    },
+    {
+      kind: 'Logic', minutes: 2,
+      tease: 'A tangle of yesterdays and tomorrows. What day is it?',
+      question: 'Three days after the day before yesterday is a Friday. What day is it today?',
+      options: ['Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      answer: 1,
+      steps: [
+        'The day before yesterday is two days before today.',
+        'Three days after that is one day after today, so tomorrow is Friday.',
+        'That makes today Thursday.'
+      ],
+      takeaway: 'Turn each phrase into a number of days from today, then add them up.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Four coin tosses. How likely is an even split?',
+      question: 'You toss a fair coin four times. What is the chance of getting exactly two heads?',
+      options: ['1 in 4', '3 in 8', '1 in 2', '5 in 8'],
+      answer: 1,
+      steps: [
+        'Four tosses can land in 2 × 2 × 2 × 2 = 16 equally likely ways.',
+        'Exactly two heads happens in 6 of them: HHTT, HTHT, HTTH, THHT, THTH and TTHH.',
+        '6 in 16 is 3 in 8.',
+        'Two heads is the most likely number of heads, yet it still happens less than half the time.'
+      ],
+      takeaway: 'The most likely result can still be less likely than all the other results put together.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 3,
+      tease: 'A gym says its long-term members lost 8 kg. What is it leaving out?',
+      question: 'A gym advert says: <q>Members who have been with us for two years have lost 8 kg on average.</q> What is the biggest problem with using this to judge the gym?',
+      options: ['8 kg is too little to notice', 'It counts only the people who stayed, and those who saw no results may have left', 'Two years is too long to measure anything', 'The advert does not say who owns the gym'],
+      answer: 1,
+      steps: [
+        'The figure only includes people who were still members after two years.',
+        'People who lose weight and enjoy it are more likely to stay. People who see no change are more likely to quit.',
+        'So the stayers can show a large average loss even if the gym makes no difference to a typical person who joins.',
+        'A fair figure would follow everyone who joined two years ago, including those who left.'
+      ],
+      takeaway: 'When a figure only counts the people who stuck with something, ask what happened to the ones who did not.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'Roll a die until you have seen two particular numbers. How long does it take?',
+      question: 'You roll a fair six-sided die again and again until you have seen both a 1 and a 2, in either order. On average, how many rolls does that take?',
+      options: ['6', '7', '9', '12'],
+      answer: 2,
+      steps: [
+        'At first, each roll shows a 1 or a 2 with chance 2 in 6, so on average the first of them takes 6 ÷ 2 = 3 rolls.',
+        'Now you need the other number, which each roll shows with chance 1 in 6. On average that takes 6 more rolls.',
+        '3 + 6 = 9 rolls on average. A computer simulation of 200,000 tries gives the same figure.'
+      ],
+      takeaway: 'Split a long wait into stages, and the average wait is the sum of the average wait for each stage.'
+    },
+    {
+      kind: 'Logic', minutes: 2,
+      tease: 'All strikers are fast, and Priya is fast. So what is Priya?',
+      question: 'Every striker in a football team is fast. Priya, who plays for the team, is fast. What can you conclude?',
+      options: ['Priya is a striker', 'Priya is not a striker', 'Nothing about whether Priya is a striker', 'Every fast player is a striker'],
+      answer: 2,
+      steps: [
+        'The rule says that being a striker means being fast. It does not say that being fast means being a striker.',
+        'Priya could be a fast striker, and that fits the rule.',
+        'Priya could also be a fast defender, and that fits the rule too.',
+        'Both are possible, so you cannot tell which position she plays.'
+      ],
+      takeaway: '<q>All A are B</q> does not mean <q>all B are A</q>. Check which way a rule runs.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many times does a car wheel turn on a long drive?',
+      question: 'A car wheel, tyre included, is about 60 cm across. Roughly how many times does it turn on a 100 km journey?',
+      options: ['5,000', '50,000', '500,000', '5 million'],
+      answer: 1,
+      steps: [
+        'Each turn moves the car forward by the distance around the wheel, about 3 × 60 cm, which is just under 2 m.',
+        '100 km is 100,000 m.',
+        '100,000 ÷ 1.9 is about 53,000 turns.'
+      ],
+      takeaway: 'Find how far one turn takes you, then divide the whole distance by it.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How much air do you breathe in a single day?',
+      question: 'Each breath you take at rest is about half a litre of air, and you take about 15 breaths a minute. Roughly how much air do you breathe in a day?',
+      options: ['100 litres', '1,000 litres', '10,000 litres', '100,000 litres'],
+      answer: 2,
+      steps: [
+        'In one minute you breathe about 15 × 0.5 = 7.5 litres.',
+        'A day has 60 × 24 = 1,440 minutes.',
+        '7.5 × 1,440 is about 10,800 litres, so roughly 10,000.'
+      ],
+      takeaway: 'Work out one small unit of time, then scale it up by how many of those units there are.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Pick a number from 1 to 100. How likely is it to have a 7 in it?',
+      question: 'You pick a whole number from 1 to 100 at random, each equally likely. What is the chance that the number contains the digit 7 at least once?',
+      options: ['10 in 100', '18 in 100', '19 in 100', '20 in 100'],
+      answer: 2,
+      steps: [
+        'Ten numbers end in 7: 7, 17, 27 and so on up to 97.',
+        'Ten numbers are in the seventies: 70 to 79.',
+        '77 is in both lists, so it has been counted twice.',
+        'That leaves 10 + 10 − 1 = 19 numbers, so the chance is 19 in 100.'
+      ],
+      takeaway: 'When two lists overlap, add them and then take away what you counted twice.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'Two offices, two scores, one company average. Is it right?',
+      question: 'A company has two offices. The 10 staff in the small office rate their job 9 out of 10 on average. The 90 staff in the large office rate it 5 out of 10 on average. A report adds 9 and 5, halves it, and says the average rating across the company is 7. What is the true average across all 100 staff?',
+      options: ['7', '6', '5.4', '5'],
+      answer: 2,
+      steps: [
+        'The small office gives 10 × 9 = 90 points in total.',
+        'The large office gives 90 × 5 = 450 points.',
+        'Together that is 540 points from 100 people, an average of 5.4.',
+        'The report treated 10 people and 90 people as if they counted equally.'
+      ],
+      takeaway: 'Never average two averages unless the groups are the same size; weight each by how many it covers.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Four lines on a notice, each counting the false ones. Which can be true?',
+      question: 'A notice has four lines. Line 1: <q>Exactly one line on this notice is false.</q> Line 2: <q>Exactly two lines are false.</q> Line 3: <q>Exactly three lines are false.</q> Line 4: <q>All four lines are false.</q> Each line is either true or false. Which lines are true?',
+      options: ['Only line 1', 'Only line 3', 'Lines 1 and 3', 'None of them'],
+      answer: 1,
+      steps: [
+        'The lines contradict each other, so at most one of them can be true.',
+        'If none were true, all four would be false, which would make line 4 true. So exactly one is true.',
+        'With one true line, three lines are false, and that is exactly what line 3 says.'
+      ],
+      takeaway: 'With statements that talk about themselves, test each possible count and keep the one that agrees with itself.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'Roll two dice and keep the higher one. What do you get on average?',
+      question: 'You roll two fair six-sided dice and keep whichever number is higher (if they match, you keep that number). On average, what number do you keep?',
+      options: ['3.5', 'About 4', 'About 4.5', 'About 5'],
+      answer: 2,
+      steps: [
+        'Of the 36 equally likely rolls, the higher number is 1 in 1 roll, 2 in 3 rolls, 3 in 5, 4 in 7, 5 in 9 and 6 in 11.',
+        'Add up the kept numbers: 1×1 + 2×3 + 3×5 + 4×7 + 5×9 + 6×11 = 161.',
+        '161 ÷ 36 is about 4.47, so about 4.5.'
+      ],
+      takeaway: 'Keeping the best of two tries pulls the average up, but by less than you might guess.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How many sheets of paper would cover a football pitch?',
+      question: 'A football pitch is about 100 m long and 70 m wide. A sheet of A4 paper is about 21 cm by 30 cm. Roughly how many sheets, laid flat without overlapping, would cover the pitch?',
+      options: ['1,000', '10,000', '100,000', '1 million'],
+      answer: 2,
+      steps: [
+        'The pitch is 100 × 70 = 7,000 square metres.',
+        'A sheet is 0.21 × 0.3, about 0.063 square metres, so about 16 sheets cover one square metre.',
+        '7,000 × 16 is about 112,000 sheets, so roughly 100,000.'
+      ],
+      takeaway: 'For areas, put both things in the same units, then divide the big area by the small one.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'A big online poll says most people prefer shopping online. Should you believe it?',
+      question: 'A shopping website puts a poll on its home page: <q>Do you prefer shopping online or in shops?</q> Of 20,000 replies, 85% say online. A headline says most people prefer shopping online. What is the biggest problem?',
+      options: ['20,000 replies is too few to mean anything', 'Only people already visiting a shopping website could answer', 'The poll should have offered more than two choices', 'Nothing, 85% is a clear majority'],
+      answer: 1,
+      steps: [
+        'Everyone who answered was already on a shopping website, so they were likely to shop online.',
+        'People who prefer shops were far less likely to see the poll at all.',
+        'A large sample does not fix this: 20,000 people chosen in a biased way still give a biased answer.'
+      ],
+      takeaway: 'Ask who could answer a poll before trusting what it says about everyone.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'A million pound coins in one tall stack. How high does it reach?',
+      question: 'You stack one million £1 coins on top of each other. Each coin is about 3 mm thick. Roughly how tall is the stack?',
+      options: ['30 metres', '300 metres', '3 kilometres', '30 kilometres'],
+      answer: 2,
+      steps: [
+        'One million coins at 3 mm each is 3 million mm.',
+        'There are 1,000 mm in a metre, so that is 3,000 m.',
+        'There are 1,000 m in a kilometre, so the stack is about 3 km tall.'
+      ],
+      takeaway: 'Multiply first, then convert units one step at a time so the zeros stay under control.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 2,
+      tease: 'An app says it is growing every month. Is it?',
+      question: 'An app reports its total sign-ups since launch at the end of each month: January 1,000, February 1,900, March 2,500, April 2,800. Its advert says <q>Growing every month</q>. How many people signed up during April?',
+      options: ['2,800', '900', '300', 'None'],
+      answer: 2,
+      steps: [
+        'Each figure is a running total, so it counts everyone who has ever signed up.',
+        'New sign-ups in a month are the difference between one total and the one before.',
+        'That gives 900 in February, 600 in March and 300 in April.',
+        'The total still rises, but the number of new sign-ups has fallen every month.'
+      ],
+      takeaway: 'A running total can only go up, so look at the change from one period to the next.'
+    },
+    {
+      kind: 'Probability', minutes: 2,
+      tease: 'Your train is late one day in five. How likely is a whole week on time?',
+      question: 'Your train is late on 1 day in 5 at random, and each day is independent of the others. What is the chance it is on time on all five days of a working week?',
+      options: ['0%', 'About 33%', 'About 50%', '80%'],
+      answer: 1,
+      steps: [
+        'On any one day the train is on time with chance 4 in 5, which is 0.8.',
+        'The days are independent, so multiply: 0.8 × 0.8 × 0.8 × 0.8 × 0.8.',
+        'That comes to about 0.33, so about a 1 in 3 chance of a week with no late trains.',
+        'It is not 0%, because 1 in 5 is an average, not a promise of exactly one late day each week.'
+      ],
+      takeaway: 'For a run of independent events all going well, multiply their chances together.'
+    },
+    {
+      kind: 'Logic', minutes: 3,
+      tease: 'Count the sisters and the brothers. How big is the family?',
+      question: 'In a family, Mia has three more sisters than brothers. Her brother Leo has twice as many sisters as brothers. How many children are in the family?',
+      options: ['10', '14', '16', '18'],
+      answer: 2,
+      steps: [
+        'Say there are g girls and b boys. Mia does not count herself, so she has g − 1 sisters and b brothers, and g − 1 = b + 3.',
+        'Leo does not count himself, so he has g sisters and b − 1 brothers, and g = 2 × (b − 1).',
+        'The first gives g = b + 4. Putting that into the second gives b + 4 = 2b − 2, so b = 6 and g = 10.',
+        'Check: Mia has 9 sisters and 6 brothers, and Leo has 10 sisters and 5 brothers. That makes 16 children.'
+      ],
+      takeaway: 'When people describe a group they belong to, remember that they leave themselves out.'
+    },
+    {
+      kind: 'Probability', minutes: 4,
+      tease: 'Twelve names in a hat for Secret Santa. How many people draw their own?',
+      question: 'Twelve people in an office do Secret Santa. Each person draws one name at random from a hat holding all twelve names, and nobody puts a name back. On average, how many people draw their own name?',
+      options: ['About 0.1', '1', 'About 3', '6'],
+      answer: 1,
+      steps: [
+        'Take any one person. Every name is equally likely to end up with them, so they get their own with chance 1 in 12.',
+        'That is true for each of the twelve people.',
+        'An average of a total is the sum of the averages, even when the draws affect each other, so the average is 12 × 1/12 = 1.',
+        'The answer would still be 1 with 5 people or 500, and a computer simulation of 200,000 draws agrees.'
+      ],
+      takeaway: 'To find the average number of things that happen, add up the chance of each one, even if they are linked.'
+    },
+    {
+      kind: 'Spot the flaw', minutes: 3,
+      tease: 'The best schools in the table are all tiny. Are small schools better?',
+      question: 'A league table ranks 1,000 schools by their average exam score. Most of the top 20 are very small schools, with fewer than 30 pupils taking exams. A report concludes that small schools teach better. Which finding would most weaken that conclusion?',
+      options: ['The top small schools are spread across the country', 'Most of the bottom 20 are very small schools too', 'Large schools employ more teachers in total', 'Every school sat the same exams'],
+      answer: 1,
+      steps: [
+        'An average over a few pupils can swing a long way because of one or two very strong or very weak results.',
+        'So small schools are more likely to land at either end of the table, even if they teach no better or worse.',
+        'If the bottom of the table is also full of small schools, that swing explains the top of the table too.',
+        'A fair test would compare small and large schools across the whole table, not just the top.'
+      ],
+      takeaway: 'Small groups produce extreme averages in both directions, so check the bottom of a ranking as well as the top.'
+    },
+    {
+      kind: 'Estimation', minutes: 2,
+      tease: 'How far do you walk in a lifetime of ordinary days?',
+      question: 'Suppose you walk about 5,000 steps a day, each about 70 cm long, every day for 80 years. The Earth is about 40,000 km round. Roughly how far would you walk?',
+      options: ['About a tenth of the way round the Earth', 'About once round the Earth', 'About two and a half times round the Earth', 'About 25 times round the Earth'],
+      answer: 2,
+      steps: [
+        '5,000 steps of 0.7 m is 3,500 m, or 3.5 km a day.',
+        'A year is about 365 days, so about 1,300 km a year.',
+        'Over 80 years that is about 100,000 km.',
+        '100,000 ÷ 40,000 is two and a half, so about two and a half times round the Earth.'
+      ],
+      takeaway: 'A small daily habit, multiplied by the days in a lifetime, becomes a very large number.'
     }
   ];
 
